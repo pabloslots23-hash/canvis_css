@@ -1,494 +1,119 @@
-/* VOURNE - Additional Styles & Overrides */
+/* --- 10 CANVIS IMPLEMENTATS EN VOURNE --- */
 
-/* Import Main Styles */
-@import url('main.css');
-@import url('animations.css');
-
-/* Enhanced Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-h1 {
-    font-size: 3rem;
-}
-
-h2 {
-    font-size: 2.5rem;
-}
-
-h3 {
-    font-size: 2rem;
-}
-
-h4 {
-    font-size: 1.5rem;
-}
-
-p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-/* Enhanced Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.form-control {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
-}
-
-.form-control.error {
-    border-color: var(--error);
-}
-
-.form-control.success {
-    border-color: var(--success);
-}
-
-/* Enhanced Button Styles */
+/* 1. Botones más amigables (UI) */
 .btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    border-radius: 6px !important; /* Suaviza las esquinas */
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none !important;
+/* 2. Tarjetas de producto Minimalistas (Sin bordes, con sombra) */
+.product-card {
+    border: none !important; /* Eliminamos el borde del diseño original */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); /* Sombra base muy sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn--sm {
-    padding: 8px 16px;
-    font-size: 0.8rem;
+.product-card:hover {
+    transform: translateY(-8px); /* Elevación más pronunciada */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Sombra difusa elegante */
 }
 
-.btn--lg {
-    padding: 16px 32px;
-    font-size: 1rem;
-}
-
-.btn--outline {
-    background: transparent;
-    border: 2px solid var(--accent);
-    color: var(--accent);
-}
-
-.btn--outline:hover {
-    background: var(--accent);
-    color: white;
-}
-
-/* Card Enhancements */
-.card {
-    background: var(--background);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-}
-
-.card--hover {
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card--hover:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.card-header {
-    padding: 1.5rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.card-body {
-    padding: 1.5rem;
-}
-
-.card-footer {
-    padding: 1.5rem;
-    border-top: 1px solid var(--border);
-    background: var(--primary-light);
-}
-
-/* Badge Styles */
-.badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.badge--primary {
-    background: var(--accent);
-    color: white;
-}
-
-.badge--success {
-    background: var(--success);
-    color: white;
-}
-
-.badge--warning {
-    background: var(--warning);
-    color: var(--text-dark);
-}
-
-.badge--error {
-    background: var(--error);
-    color: white;
-}
-
-.badge--outline {
-    background: transparent;
-    border: 1px solid currentColor;
-}
-
-/* Alert Styles */
-.alert {
-    padding: 1rem 1.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    border-left: 4px solid transparent;
-}
-
-.alert--success {
-    background: #d4edda;
-    border-color: var(--success);
-    color: #155724;
-}
-
-.alert--error {
-    background: #f8d7da;
-    border-color: var(--error);
-    color: #721c24;
-}
-
-.alert--warning {
-    background: #fff3cd;
-    border-color: var(--warning);
-    color: #856404;
-}
-
-.alert--info {
-    background: #d1ecf1;
-    border-color: #17a2b8;
-    color: #0c5460;
-}
-
-/* Loading States */
-.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin: -10px 0 0 -10px;
-    border: 2px solid transparent;
-    border-top: 2px solid currentColor;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-/* Grid Enhancements */
-.grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.grid--2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.grid--3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid--4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-/* Flexbox Utilities */
-.flex {
-    display: flex;
-}
-
-.flex--center {
-    justify-content: center;
-    align-items: center;
-}
-
-.flex--between {
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flex--around {
-    justify-content: space-around;
-    align-items: center;
-}
-
-/* Spacing Utilities */
-.m-0 { margin: 0; }
-.m-1 { margin: 0.5rem; }
-.m-2 { margin: 1rem; }
-.m-3 { margin: 1.5rem; }
-.m-4 { margin: 2rem; }
-
-.p-0 { padding: 0; }
-.p-1 { padding: 0.5rem; }
-.p-2 { padding: 1rem; }
-.p-3 { padding: 1.5rem; }
-.p-4 { padding: 2rem; }
-
-/* Text Utilities */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-
-.text-uppercase { text-transform: uppercase; }
-.text-lowercase { text-transform: lowercase; }
-.text-capitalize { text-transform: capitalize; }
-
-.text-bold { font-weight: bold; }
-.text-light { font-weight: 300; }
-
-.text-muted { color: var(--text-light); }
-
-/* Visibility Utilities */
-.hidden { display: none; }
-.visible { display: block; }
-
-@media (max-width: 768px) {
-    .hidden-mobile { display: none; }
-}
-
-@media (min-width: 769px) {
-    .hidden-desktop { display: none; }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--primary-light);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--text-light);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--text-dark);
-}
-
-/* Selection Styles */
-::selection {
-    background: var(--accent);
-    color: white;
-}
-
-::-moz-selection {
-    background: var(--accent);
-    color: white;
-}
-
-/* Print Styles */
-@media print {
-    .no-print {
-        display: none !important;
-    }
-    
-    .site-header,
-    .site-footer {
-        display: none;
-    }
-    
-    body {
-        color: black;
-        background: white;
-    }
-}
-
-/* High Contrast Mode Support */
-@media (prefers-contrast: high) {
-    :root {
-        --border: #000000;
-        --shadow: 0 2px 10px rgba(0,0,0,0.3);
-    }
-}
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* Dark Mode Support (Future Enhancement) */
-@media (prefers-color-scheme: dark) {
-    /* Base dark theme variables */
-    :root {
-        --primary: #ffffff;
-        --primary-light: #1a1a1a;
-        --text-dark: #e0e0e0;
-        --text-light: #a0a0a0;
-        --background: #121212;
-        --border: #333333;
-    }
-    
-    /* Override specific elements for dark mode */
-    .site-header {
-        background: var(--background);
-        border-bottom: 1px solid var(--border);
-    }
-    
-    .card {
-        background: var(--primary-light);
-    }
-}
-
-/* Focus Visible Polyfill */
-.js-focus-visible :focus:not(.focus-visible) {
-    outline: none;
-}
-
-/* Custom Component Styles */
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.quantity-btn {
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border);
-    background: white;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.quantity-btn:hover {
-    background: var(--primary-light);
-    border-color: var(--accent);
-}
-
-.quantity-input {
-    width: 60px;
-    text-align: center;
-    padding: 8px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-}
-
-/* Price Styles */
-.price {
-    font-weight: bold;
-    color: var(--accent);
-}
-
-.price--old {
-    text-decoration: line-through;
-    color: var(--text-light);
-    margin-right: 0.5rem;
-}
-
-.price--sale {
-    color: var(--error);
-}
-
-/* Rating Styles */
-.rating {
-    display: flex;
-    gap: 2px;
-    color: #ffc107;
-}
-
-.rating-star {
-    font-size: 0.9rem;
-}
-
-/* Progress Bar */
-.progress {
-    background: var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    height: 8px;
-}
-
-.progress-bar {
-    height: 100%;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-/* Tooltip */
-.tooltip {
-    position: relative;
-}
-
-.tooltip:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    white-space: nowrap;
+/* 3. Header Sticky con efecto Glassmorphism */
+.site-header {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.85) !important; /* Semitransparente */
+    backdrop-filter: blur(10px); /* Efecto desenfoque estilo Apple */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
     z-index: 1000;
 }
 
-.tooltip:hover::before {
+/* 4. Inputs con color de marca (UX) */
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary) !important; /* Usa tu negro #1A1A1A */
+    box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.1) !important; /* Resplandor sutil */
+    outline: none;
+}
+
+/* 5. Animación Hover en Menú de Navegación */
+.nav__link {
+    position: relative;
+}
+.nav__link::after {
     content: '';
     position: absolute;
-    bottom: calc(100% - 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: var(--primary);
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+.nav__link:hover::after {
+    width: 100%;
+}
+
+/* 6. Botones de acción (CTA) en tarjetas más visibles */
+.product-card__actions .btn {
+    background-color: var(--primary);
+    color: white;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+.product-card__actions .btn:hover {
+    background-color: #333; /* Un gris muy oscuro al hover */
+}
+
+/* 7. Animación de entrada para el Hero Title */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.hero__title {
+    animation: fadeInUp 1s ease-out forwards;
+}
+.hero__subtitle {
+    animation: fadeInUp 1s ease-out 0.3s forwards; /* Retardo de 0.3s */
+    opacity: 0; /* Estado inicial invisible */
+}
+
+/* 8. Footer más espacioso y jerarquizado */
+.site-footer {
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+}
+.footer-links a {
+    color: #666 !important;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    transition: color 0.2s;
+}
+.footer-links a:hover {
+    color: var(--primary) !important;
+    padding-left: 5px; /* Pequeño desplazamiento al hover */
+}
+
+/* 9. Badges de categoría modernos */
+.category-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+}
+
+/* 10. Precio destacado en el catálogo */
+.product-card__price {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    color: var(--primary);
+    margin-top: 0.5rem;
 }
