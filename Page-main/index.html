@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOURNE - Minimal Luxury</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav__brand">VOURNE</a>
+                <div class="nav__left">
+                    <a href="catalog/all.html" class="nav__link">Catálogo</a>
+                    <a href="#" class="nav__link">Novedades</a>
+                    <a href="#" class="nav__link">Acerca</a>
+                </div>
+                <div class="nav__right">
+                    <a href="cart.html" class="nav__link"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="#" class="nav__link"><i class="fas fa-user"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="container">
+            <h3>Tu Carrito (0)</h3>
+            <p>Aún no hay productos.</p>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero__background"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">VOURNE</h1>
+            <p class="hero__subtitle">MINIMAL LUXURY</p>
+            <a href="#featured" class="btn btn--primary cta-button">EXPLORE COLLECTION</a>
+        </div>
+    </section>
+
+    <section class="philosophy-section section-spacing">
+        <div class="container">
+            <div class="philosophy-content">
+                <div class="philosophy-image-container">
+                    <img src="https://picsum.photos/seed/minimalist/1200/800" alt="VOURNE Philosophy" class="responsive-image">
+                </div>
+                <div class="philosophy-text">
+                    <h2>Nuestra Esencia Minimalista</h2>
+                    <p>En VOURNE, creemos que la verdadera elegancia reside en la simplicidad. Cada pieza está diseñada con líneas limpias, cortes precisos y materiales premium para un lujo discreto que perdura.</p>
+                    <a href="#" class="btn btn--secondary btn--sm">Conoce más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-section section-spacing" id="featured">
+        <div class="container">
+            <h2 class="section-title">Colección Destacada</h2>
+            <div class="featured-grid auto-grid" id="featuredGrid">
+                </div>
+            <div class="text-center mt-2">
+                <a href="catalog/all.html" class="btn btn--primary">Ver Catálogo Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section section-spacing-sm">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Únete a Nuestra Comunidad</h2>
+                <p class="newsletter-description">
+                    Suscríbete para recibir novedades, lanzamientos exclusivos y ofertas especiales.
+                </p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+                    <button type="submit" class="btn btn--primary newsletter-button">Suscribirse</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="index.html" class="footer-logo">VOURNE</a>
+                    <p class="footer-description">Lujo minimalista para el día a día.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Información</h4>
+                    <div class="footer-links">
+                        <a href="contact.html">Contacto</a>
+                        <a href="legal/shipping.html">Preguntas Frecuentes</a>
+                        <a href="legal/shipping.html">Envíos y Devoluciones</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Síguenos</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 VOURNE. Todos los derechos reservados.</p>
+                <div class="footer-legal">
+                    <a href="legal/privacy.html">Política de Privacidad</a>
+                    <a href="legal/terms.html">Términos de Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+/* ... (parte superior del CSS) ... */
+
+/* Product Grid Enhancements */
+.product-card {
+    background: var(--background);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-card__image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: var(--transition);
+    /* --- AÑADIDO PARA IMAGEN DE PRUEBA EN EL ESTILO (si no hay <img>) --- */
+    background-image: url('https://picsum.photos/seed/catalogdefault/600/750');
+    background-size: cover;
+    background-position: center;
+    /* ------------------------------------------------ */
+}
+
+.product-card:hover .product-card__image {
+    transform: scale(1.05);
+}
+
+/* ... (resto del CSS) ... */

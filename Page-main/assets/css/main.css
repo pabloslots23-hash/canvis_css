@@ -1,0 +1,361 @@
+/* ================================================= */
+/* 1. PALETA DE COLORES Y VARIABLES GLOBALES (ROOT) */
+/* ================================================= */
+
+:root {
+    /* Paleta de colores VOURNE (Streetwear Limpio/Elegante) */
+    --primary: #1A1A1A; /* Negro Profundo (Texto, Botones principales) */
+    --secondary: #F8F8F8; /* Gris muy claro (Fondo de página/secciones) */
+    --accent: #A8B3C4; /* Gris Pizarra Suave (Acento y Hover) */
+    
+    /* Variables funcionales */
+    --white: #FFFFFF;
+    --text-dark: var(--primary);
+    --text-light: #666666;
+    --border: #E0E0E0;
+    --success: #6aa84f;
+    --error: #cc0000;
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
+    
+    /* Tipografía y Espaciado */
+    --font-family-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --container-max-width: 1200px;
+}
+
+/* ================================================= */
+/* 2. RESET Y ESTILOS BASE */
+/* ================================================= */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--secondary); /* Fondo limpio */
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent); /* Hover sutil */
+}
+
+/* Contenedor centralizado y responsivo */
+.container {
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* ================================================= */
+/* 3. TIPOGRAFÍA (Añadido para estructura) */
+/* ================================================= */
+
+h1, h2, h3, h4 {
+    margin-bottom: 0.7em;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* ================================================= */
+/* 4. BOTONES (Aplicación de Paleta) */
+/* ================================================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.btn--primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.btn--primary:hover {
+    background-color: var(--accent); /* Acento suave en hover */
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.btn--secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn--secondary:hover {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn--full {
+    width: 100%;
+}
+
+/* ================================================= */
+/* 5. FORMULARIOS (Para checkout.html) */
+/* ================================================= */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-group input:not([type="checkbox"]), 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Estilos de grids en formularios */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================================= */
+/* 6. LAYOUT PRINCIPAL Y HEADER */
+/* ================================================= */
+
+/* Header */
+.site-header {
+    background-color: var(--white);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.nav__left, .nav__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav__link {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.nav__link:hover {
+    color: var(--accent);
+}
+
+/* Footer */
+.site-footer {
+    background-color: var(--primary);
+    color: var(--secondary);
+    padding: 3rem 0 1.5rem;
+}
+
+.site-footer a {
+    color: var(--secondary);
+}
+
+.site-footer a:hover {
+    color: var(--accent);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-description {
+    font-size: 0.9rem;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-column h4 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer-links a {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.footer-legal a {
+    margin-left: 1rem;
+}
+
+/* ===== COMIENZAN LOS ESTILOS ORIGINALES DEL USUARIO (CON VARIABLES DE COLOR APLICADAS) ===== */
+
+/* Mejoras en la navegación */
+.nav__link {
+    position: relative;
+}
+
+.nav__link.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.nav__link.is-active {
+    font-weight: 500;
+}
+
+/* Mejoras en los dropdowns */
+.dropdown__menu {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border);
+}
+
+.dropdown__item:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+/* Mejoras en los botones */
+.btn--primary:hover::before {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); /* Más sutil */
+}
+
+/* Mejoras en los formularios */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    transform: none; /* Quitamos el transform sutil */
+    box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.5); /* Sombra de foco limpia */
+}
+
+/* Mejoras en los estados de carga */
+.loading::after {
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--accent);
+}
+
+/* Mejoras en los tooltips */
+[data-tooltip]::before {
+    background: var(--primary);
+}
+
+/* Mejoras en el focus visible */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Mejoras en el modo oscuro (preparación) - Usando variables actuales */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #FFFFFF; 
+        --secondary: #121212; 
+        --background: #121212;
+        --text-dark: var(--white);
+        --text-light: #AAAAAA;
+        --border: #333333;
+    }
+    .site-header { background-color: #1A1A1A; border-bottom-color: #333; }
+    .site-footer { background-color: #000000; }
+    .dropdown__menu { background-color: rgba(0, 0, 0, 0.9); }
+}
+
+/* Mejoras en la selección de texto */
+::selection {
+    background: var(--accent);
+    color: var(--white);
+}
+
+::-moz-selection {
+    background: var(--accent);
+    color: var(--white);
+}

@@ -1,0 +1,22 @@
+/* ... (parte superior del CSS) ... */
+
+/* Product Info in Tables */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.product-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    /* --- AÑADIDO PARA IMAGEN DE PRUEBA EN EL ESTILO --- */
+    background-image: url('https://picsum.photos/seed/productthumb/50/50');
+    background-size: cover;
+    background-position: center;
+    /* ------------------------------------------------ */
+}
+
+/* ... (resto del CSS) ... */

@@ -1,0 +1,32 @@
+IMÁGENES DE PRODUCTOS REQUERIDAS
+=================================
+
+Para que la tienda funcione correctamente, necesitas estas imágenes:
+
+assets/images/products/
+├── parka-tecnica.jpg
+├── jersey-oversize.jpg
+├── jeans-flare.jpg
+├── chaqueta-mixta.jpg
+├── vestido-midi.jpg
+└── sudadera-capucha.jpg
+
+assets/images/
+├── hero-bg.jpg (Imagen de fondo del hero)
+├── philosophy-bg.jpg (Imagen sección filosofía)
+└── logo.png (Logo de VOURNE)
+
+INSTRUCCIONES:
+1. Puedes usar imágenes de placeholder de:
+   - https://unsplash.com
+   - https://picsum.photos
+   - https://placeholder.com
+
+2. Tamaños recomendados:
+   - Productos: 600x800px
+   - Hero: 1920x1080px
+   - Filosofía: 800x600px
+
+3. Formatos: JPG, PNG, WebP
+
+4. Nombra los archivos exactamente como se indica arriba

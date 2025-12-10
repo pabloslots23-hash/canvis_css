@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los Productos - VOURNE</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/catalog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <nav class="nav container">
+            <div class="nav__left">
+                <a class="nav__link" href="../index.html">HOME</a>
+                <a class="nav__link" href="men.html">MEN</a>
+                <a class="nav__link" href="women.html">WOMEN</a>
+                <a class="nav__link" href="accessories.html">ACCESSORIES</a>
+            </div>
+            <div class="nav__center">
+                <a href="../index.html" class="nav__brand">VOURNE</a>
+            </div>
+            <div class="nav__right">
+                <a class="nav__link" href="#" aria-label="Cuenta">
+                    <i class="far fa-user"></i>
+                </a>
+                <div class="cart-dropdown">
+                    <a class="nav__link cart-dropdown__toggle" href="../cart.html">
+                        <i class="far fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="catalog-page">
+        <div class="container">
+            <div class="catalog-header">
+                <h1>Todos los Productos</h1>
+                <p>Descubre nuestra colección completa de moda minimalista</p>
+            </div>
+
+            <div class="catalog-filters">
+                <div class="filter-group">
+                    <label for="category-filter">Categoría:</label>
+                    <select id="category-filter">
+                        <option value="all">Todas las categorías</option>
+                        <option value="men">Hombre</option>
+                        <option value="women">Mujer</option>
+                        <option value="accessories">Accesorios</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort-filter">Ordenar por:</label>
+                    <select id="sort-filter">
+                        <option value="newest">Más recientes</option>
+                        <option value="price-low">Precio: menor a mayor</option>
+                        <option value="price-high">Precio: mayor a menor</option>
+                        <option value="name">Nombre A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Los productos se cargan dinámicamente -->
+            </div>
+
+            <div class="catalog-empty" id="catalogEmpty">
+                <div class="empty-state">
+                    <i class="far fa-shopping-bag"></i>
+                    <h2>Catálogo Vacío</h2>
+                    <p>Próximamente añadiremos nuevos productos</p>
+                    <a href="../index.html" class="btn btn--primary">Volver al Inicio</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">VOURNE</a>
+                    <p class="footer-description">
+                        Minimal Luxury - Ropa y accesorios diseñados con atención al detalle y materiales de calidad.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Comprar</h4>
+                    <div class="footer-links">
+                        <a href="men.html" class="footer-link">Hombre</a>
+                        <a href="women.html" class="footer-link">Mujer</a>
+                        <a href="accessories.html" class="footer-link">Accesorios</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ayuda</h4>
+                    <div class="footer-links">
+                        <a href="../legal/shipping.html" class="footer-link">Envíos & Devoluciones</a>
+                        <a href="../legal/terms.html" class="footer-link">Términos & Condiciones</a>
+                        <a href="../legal/privacy.html" class="footer-link">Política de Privacidad</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 VOURNE. ALL RIGHTS RESERVED.
+                </div>
+                <div class="footer-legal">
+                    <a href="../legal/privacy.html" class="footer-link">Privacidad</a>
+                    <a href="../legal/terms.html" class="footer-link">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/catalog.js"></script>
+</body>
+</html>

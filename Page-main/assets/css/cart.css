@@ -1,0 +1,119 @@
+/* Cart Page Styles */
+.cart-page {
+    padding: 120px 0 60px;
+    min-height: 70vh;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-header h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.continue-shopping {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.continue-shopping:hover {
+    color: var(--accent);
+}
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 3rem;
+}
+
+.cart-items-section {
+    background: var(--background);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cart-items-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--primary-light);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+
+.cart-items-container {
+    min-height: 200px;
+}
+
+.cart-item-detailed {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+}
+
+.cart-item-detailed:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    /* --- AÑADIDO PARA IMAGEN DE PRUEBA EN EL ESTILO --- */
+    background-image: url('https://picsum.photos/seed/cartitem/100/100');
+    background-size: cover;
+    background-position: center;
+    /* ------------------------------------------------ */
+}
+
+.cart-item-details h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.cart-item-details p {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.cart-item-price {
+    font-weight: 500;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ... (resto del CSS) ... */

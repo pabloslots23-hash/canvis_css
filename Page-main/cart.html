@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - VOURNE</title>
+    <link rel="stylesheet" href="assets/css/style.css"> 
+    <link rel="stylesheet" href="assets/css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <nav class="nav container">
+            <div class="nav__left">
+                <a class="nav__link" href="index.html">HOME</a>
+                <a class="nav__link" href="catalog/men.html">MEN</a>
+                <a class="nav__link" href="catalog/women.html">WOMEN</a>
+            </div>
+
+            <div class="nav__center">
+                <a href="index.html" class="nav__brand">VOURNE</a>
+            </div>
+
+            <div class="nav__right">
+                <a class="nav__link" href="#" aria-label="Cuenta">
+                    <i class="far fa-user"></i>
+                </a>
+                <div class="cart-dropdown">
+                    <a class="nav__link cart-dropdown__toggle" href="cart.html">
+                        <i class="far fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <div class="container">
+            <div class="cart-header">
+                <h1>Tu Carrito de Compra</h1>
+                <a href="catalog/all.html" class="continue-shopping">
+                    <i class="fas fa-arrow-left"></i>
+                    Continuar Comprando
+                </a>
+            </div>
+
+            <div class="cart-layout">
+                <div class="cart-items-section">
+                    <div class="cart-items-header">
+                        <span>Producto</span>
+                        <span>Precio</span>
+                        <span>Cantidad</span>
+                        <span>Total</span>
+                    </div>
+                    
+                    <div class="cart-items-container" id="cartItemsContainer">
+                        </div>
+
+                    <div class="cart-empty" id="cartEmpty">
+                        <div class="empty-state">
+                            <i class="far fa-shopping-bag"></i>
+                            <h2>Tu carrito está vacío</h2>
+                            <p>Descubre nuestra colección y encuentra tu estilo perfecto</p>
+                            <a href="catalog/all.html" class="btn btn--primary">Explorar Catálogo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="summary-card">
+                        <h3>Resumen del Pedido</h3>
+                        
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">0,00 €</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>Envío</span>
+                            <span id="shippingCost">-</span>
+                        </div>
+                        
+                        <div class="summary-divider"></div>
+                        
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span id="totalAmount">0,00 €</span>
+                        </div>
+
+                        <div class="shipping-notice">
+                            <i class="fas fa-truck"></i>
+                            <span>Envío gratuito en pedidos superiores a 100€</span>
+                        </div>
+
+                        <a href="checkout.html" class="btn btn--primary btn--full" id="checkoutBtn">
+                            Proceder al Pago
+                        </a>
+
+                        <div class="payment-methods">
+                            <p>Métodos de pago aceptados:</p>
+                            <div class="payment-icons">
+                                <i class="fab fa-cc-visa" title="Visa"></i>
+                                <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                                <i class="fab fa-cc-paypal" title="PayPal"></i>
+                                <i class="fas fa-university" title="Transferencia"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">VOURNE</a>
+                    <p class="footer-description">
+                        Minimal Luxury - Ropa y accesorios diseñados con atención al detalle y materiales de calidad.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Comprar</h4>
+                    <div class="footer-links">
+                        <a href="catalog/men.html" class="footer-link">Hombre</a>
+                        <a href="catalog/women.html" class="footer-link">Mujer</a>
+                        <a href="catalog/accessories.html" class="footer-link">Accesorios</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Ayuda</h4>
+                    <div class="footer-links">
+                        <a href="legal/shipping.html" class="footer-link">Envíos & Devoluciones</a>
+                        <a href="legal/terms.html" class="footer-link">Términos & Condiciones</a>
+                        <a href="legal/privacy.html" class="footer-link">Política de Privacidad</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 VOURNE. ALL RIGHTS RESERVED.
+                </div>
+                <div class="footer-legal">
+                    <a href="legal/privacy.html" class="footer-link">Privacidad</a>
+                    <a href="legal/terms.html" class="footer-link">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/cart.js"></script>
+</body>
+</html>

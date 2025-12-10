@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - VOURNE</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/checkout.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <nav class="nav container">
+            <div class="nav__center">
+                <a href="index.html" class="nav__brand">VOURNE</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="checkout-page">
+        <div class="container">
+            <div class="checkout-header">
+                <h1>Finalizar Compra</h1>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Información</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Envío</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Pago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-layout">
+                <div class="checkout-form-section">
+                    <form id="checkoutForm" class="checkout-form">
+                        
+                        <div class="form-step active" data-step="1">
+                            <h2>Información de Contacto</h2>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="first_name">Nombre *</label>
+                                    <input type="text" id="first_name" name="first_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Apellidos *</label>
+                                    <input type="text" id="last_name" name="last_name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--secondary prev-step" onclick="window.history.back()">
+                                    Volver al Carrito
+                                </button>
+                                <button type="button" class="btn btn--primary next-step" onclick="checkout.handleNextStep(event)">
+                                    Continuar al Envío
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="2" style="display:none;">
+                            <h2>Dirección de Envío</h2>
+                            <div class="form-group">
+                                <label for="shipping_address">Dirección *</label>
+                                <input type="text" id="shipping_address" name="shipping_address" required>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="shipping_city">Ciudad *</label>
+                                    <input type="text" id="shipping_city" name="shipping_city" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping_postal_code">Código Postal *</label>
+                                    <input type="text" id="shipping_postal_code" name="shipping_postal_code" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="shipping_country">País *</label>
+                                <select id="shipping_country" name="shipping_country" required>
+                                    </select>
+                            </div>
+                            
+                            <h3>Método de Envío</h3>
+                            <div class="shipping-options">
+                                <div class="shipping-option">
+                                    <input type="radio" id="shipping-standard" name="shipping_method" value="standard" checked>
+                                    <label for="shipping-standard">
+                                        <span>Envío Estándar (3-5 días)</span>
+                                        <span>4,95 €</span>
+                                    </label>
+                                </div>
+                                <div class="shipping-option">
+                                    <input type="radio" id="shipping-express" name="shipping_method" value="express">
+                                    <label for="shipping-express">
+                                        <span>Envío Express (1-2 días)</span>
+                                        <span>9,95 €</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--secondary prev-step" onclick="checkout.handlePrevStep(event)">
+                                    <i class="fas fa-arrow-left"></i> Volver Atrás
+                                </button>
+                                <button type="button" class="btn btn--primary next-step" onclick="checkout.handleNextStep(event)">
+                                    Continuar al Pago <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-step" data-step="3" style="display:none;">
+                            <h2>Método de Pago</h2>
+                            
+                            <div class="payment-options">
+                                <div class="payment-option">
+                                    <input type="radio" id="payment-card" name="payment_method" value="credit_card" checked>
+                                    <label for="payment-card">
+                                        <i class="fab fa-cc-visa"></i>
+                                        <i class="fab fa-cc-mastercard"></i>
+                                        <span>Tarjeta de Crédito/Débito</span>
+                                    </label>
+                                    
+                                    <div class="payment-fields credit_card-fields">
+                                        <div class="form-group">
+                                            <label for="card_name">Nombre en la Tarjeta *</label>
+                                            <input type="text" id="card_name" name="card_name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card_number">Número de Tarjeta *</label>
+                                            <input type="text" id="card_number" name="card_number" placeholder="XXXX XXXX XXXX XXXX" required>
+                                        </div>
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="card_expiry">Fecha Exp. (MM/AA) *</label>
+                                                <input type="text" id="card_expiry" name="card_expiry" placeholder="MM/YY" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="card_cvc">CVC *</label>
+                                                <input type="text" id="card_cvc" name="card_cvc" placeholder="XXX" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="payment-paypal" name="payment_method" value="paypal">
+                                    <label for="payment-paypal">
+                                        <i class="fab fa-paypal"></i>
+                                        <span>PayPal</span>
+                                    </label>
+                                    <div class="payment-fields paypal-fields" style="display:none;">
+                                        <p>Serás redirigido a la página segura de PayPal para completar tu compra.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <input type="radio" id="payment-transfer" name="payment_method" value="bank_transfer">
+                                    <label for="payment-transfer">
+                                        <i class="fas fa-university"></i>
+                                        <span>Transferencia Bancaria</span>
+                                    </label>
+                                    
+                                    <div class="payment-fields bank_transfer-fields" style="display:none;">
+                                        <p>Tu pedido se confirmará como pendiente. Recibirás un email con los datos bancarios para completar el pago.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="terms-agreement">
+                                <input type="checkbox" id="accept_terms" name="accept_terms" required>
+                                <label for="accept_terms">
+                                    Acepto los <a href="legal/terms.html" target="_blank">Términos y Condiciones</a> 
+                                    y la <a href="legal/privacy.html" target="_blank">Política de Privacidad</a>
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn--secondary prev-step" onclick="checkout.handlePrevStep(event)">
+                                    <i class="fas fa-arrow-left"></i> Volver Atrás
+                                </button>
+                                <button type="submit" class="btn btn--primary next-step" id="submitOrder">
+                                    <i class="fas fa-lock"></i> Completar Pedido
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="order-summary-section" id="order-summary">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 VOURNE. ALL RIGHTS RESERVED.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/checkout.js"></script>
+</body>
+</html>
