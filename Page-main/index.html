@@ -3,59 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOURNE - Minimal Luxury</title>
+    <title>STR4WRLD - VOURNE EDITION</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="dark-theme">
+    
     <header class="site-header" id="header">
         <div class="container">
             <nav class="nav">
                 <a href="index.html" class="nav__brand">VOURNE</a>
                 <div class="nav__left">
-                    <a href="catalog/all.html" class="nav__link">Catálogo</a>
-                    <a href="#" class="nav__link">Novedades</a>
-                    <a href="#" class="nav__link">Acerca</a>
+                    <a href="catalog/all.html" class="nav__link">CATÁLOGO</a>
+                    <a href="#" class="nav__link">DROPS</a>
+                    <a href="#" class="nav__link">VISION</a>
                 </div>
                 <div class="nav__right">
-                    <a href="cart.html" class="nav__link"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="cart.html" class="nav__link cart-toggle">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
                     <a href="#" class="nav__link"><i class="fas fa-user"></i></a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-modal" id="cartModal">
-        <div class="container">
-            <h3>Tu Carrito (0)</h3>
-            <p>Aún no hay productos.</p>
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header-row">
+            <h3>CARRITO</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <p class="empty-msg">TU CARRITO ESTÁ VACÍO.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span class="cart-subtotal">0.00 €</span>
+            </div>
+            <a href="checkout.html" class="btn btn--primary btn--full">PAGAR AHORA</a>
         </div>
     </div>
 
     <section class="hero" id="home">
         <div class="hero__background"></div>
+        <div class="hero__overlay"></div>
         <div class="hero__content">
-            <h1 class="hero__title">VOURNE</h1>
-            <p class="hero__subtitle">MINIMAL LUXURY</p>
-            <a href="#featured" class="btn btn--primary cta-button">EXPLORE COLLECTION</a>
+            <h1 class="hero__title glitch" data-text="VOURNE">VOURNE</h1>
+            <p class="hero__subtitle">NO RULES. JUST AESTHETICS.</p>
+            <a href="#featured" class="btn btn--primary cta-button">VER COLECCIÓN</a>
         </div>
     </section>
 
     <section class="philosophy-section section-spacing">
         <div class="container">
             <div class="philosophy-content">
-                <div class="philosophy-image-container">
-                    <img src="https://picsum.photos/seed/minimalist/1200/800" alt="VOURNE Philosophy" class="responsive-image">
-                </div>
-                <div class="philosophy-text">
-                    <h2>Nuestra Esencia Minimalista</h2>
-                    <p>En VOURNE, creemos que la verdadera elegancia reside en la simplicidad. Cada pieza está diseñada con líneas limpias, cortes precisos y materiales premium para un lujo discreto que perdura.</p>
-                    <a href="#" class="btn btn--secondary btn--sm">Conoce más</a>
+                <div class="philosophy-text text-center">
+                    <h2>WORLDWIDE UNDERGROUND</h2>
+                    <p>Diseñado para destacar en la oscuridad. Calidad premium, cortes oversize y la esencia de la calle.</p>
                 </div>
             </div>
         </div>
@@ -63,26 +78,27 @@
 
     <section class="featured-section section-spacing" id="featured">
         <div class="container">
-            <h2 class="section-title">Colección Destacada</h2>
+            <h2 class="section-title">LATEST DROPS</h2>
             <div class="featured-grid auto-grid" id="featuredGrid">
-                </div>
-            <div class="text-center mt-2">
-                <a href="catalog/all.html" class="btn btn--primary">Ver Catálogo Completo</a>
+                <div class="loading-text">CARGANDO DROPS...</div>
+            </div>
+            <div class="view-all-container">
+                <a href="catalog/all.html" class="btn btn--secondary">VER TODO</a>
             </div>
         </div>
     </section>
 
     <section class="newsletter-section section-spacing-sm">
         <div class="container">
-            <div class="newsletter-content">
-                <h2 class="newsletter-title">Únete a Nuestra Comunidad</h2>
-                <p class="newsletter-description">
-                    Suscríbete para recibir novedades, lanzamientos exclusivos y ofertas especiales.
-                </p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
-                    <button type="submit" class="btn btn--primary newsletter-button">Suscribirse</button>
-                </form>
+            <div class="newsletter-border">
+                <div class="newsletter-content">
+                    <h2 class="newsletter-title">JOIN THE CULT</h2>
+                    <p>Acceso anticipado a drops y descuentos exclusivos.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" class="newsletter-input" placeholder="EMAIL" required>
+                        <button type="submit" class="btn btn--primary">SUSCRIBIRSE</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -92,36 +108,32 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <a href="index.html" class="footer-logo">VOURNE</a>
-                    <p class="footer-description">Lujo minimalista para el día a día.</p>
+                    <p class="footer-description">EST. 2025</p>
                 </div>
                 <div class="footer-column">
-                    <h4>Información</h4>
+                    <h4>AYUDA</h4>
                     <div class="footer-links">
-                        <a href="contact.html">Contacto</a>
-                        <a href="legal/shipping.html">Preguntas Frecuentes</a>
-                        <a href="legal/shipping.html">Envíos y Devoluciones</a>
+                        <a href="contact.html">CONTACTO</a>
+                        <a href="legal/shipping.html">ENVÍOS</a>
+                        <a href="legal/terms.html">TÉRMINOS</a>
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h4>Síguenos</h4>
-                    <div class="footer-links">
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
-                        <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <h4>SOCIAL</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 VOURNE. Todos los derechos reservados.</p>
-                <div class="footer-legal">
-                    <a href="legal/privacy.html">Política de Privacidad</a>
-                    <a href="legal/terms.html">Términos de Servicio</a>
-                </div>
+                <p>&copy; 2025 VOURNE WORLDWIDE.</p>
             </div>
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
     <script src="assets/js/cart.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
