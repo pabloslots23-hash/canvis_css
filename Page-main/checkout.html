@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHECKOUT - VOURNE</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -21,29 +22,104 @@
             </div>
 
             <div class="checkout-steps">
-                <div class="step active">01 INFO</div>
-                <div class="step">02 ENVÍO</div>
-                <div class="step">03 PAGO</div>
+                <div class="step active" id="step-indicator-1">01 INFO</div>
+                <div class="step" id="step-indicator-2">02 PAGO</div>
+                <div class="step" id="step-indicator-3">03 CONFIRMACIÓN</div>
             </div>
 
-            <form>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="TU EMAIL" required>
+            <form id="checkoutForm">
+                <div class="checkout-step-content" id="step-1">
+                    <h3 class="mb-2">DATOS DE ENVÍO</h3>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="TU EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" placeholder="NOMBRE Y APELLIDOS" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input type="text" placeholder="CALLE Y NÚMERO" required>
+                    </div>
+                    <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                        <input type="text" placeholder="CIUDAD" required>
+                        <input type="text" placeholder="CÓDIGO POSTAL" required>
+                    </div>
+                    <div class="mt-2">
+                        <button type="button" class="btn btn--primary btn--full" onclick="goToStep(2)">CONTINUAR AL PAGO</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Dirección de Envío</label>
-                    <input type="text" placeholder="CALLE Y NÚMERO" required>
-                </div>
-                <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
-                    <input type="text" placeholder="CIUDAD" required>
-                    <input type="text" placeholder="CÓDIGO POSTAL" required>
-                </div>
-                <div class="mt-2">
-                    <button type="submit" class="btn btn--primary btn--full">CONTINUAR AL ENVÍO</button>
+
+                <div class="checkout-step-content hidden" id="step-2">
+                    <h3 class="mb-2">MÉTODO DE PAGO</h3>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option selected" onclick="selectPayment(this, 'card')">
+                            <i class="fas fa-credit-card payment-icon"></i>
+                            <span>TARJETA DE CRÉDITO / DÉBITO</span>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'paypal')">
+                            <i class="fab fa-paypal payment-icon"></i>
+                            <span>PAYPAL</span>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this, 'crypto')">
+                            <i class="fab fa-bitcoin payment-icon"></i>
+                            <span>CRYPTO (BTC/ETH)</span>
+                        </div>
+                    </div>
+
+                    <div id="card-details" class="mt-2">
+                        <div class="form-group">
+                            <label>Número de Tarjeta</label>
+                            <input type="text" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                            <input type="text" placeholder="MM/YY">
+                            <input type="text" placeholder="CVC">
+                        </div>
+                    </div>
+
+                    <div class="mt-2" style="display:flex; gap:1rem;">
+                        <button type="button" class="btn btn--secondary" style="flex:1;" onclick="goToStep(1)">ATRÁS</button>
+                        <button type="submit" class="btn btn--primary" style="flex:2;">FINALIZAR PEDIDO</button>
+                    </div>
                 </div>
             </form>
         </div>
     </main>
+
+    <script>
+        function goToStep(step) {
+            // Ocultar todos
+            document.querySelectorAll('.checkout-step-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            
+            // Mostrar actual
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+            
+            // Actualizar indicadores (y anteriores)
+            for(let i=1; i<=step; i++) {
+                document.getElementById(`step-indicator-${i}`).classList.add('active');
+            }
+        }
+
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            // Mostrar/Ocultar detalles de tarjeta
+            const cardDetails = document.getElementById('card-details');
+            if(method === 'card') cardDetails.classList.remove('hidden');
+            else cardDetails.classList.add('hidden');
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡PEDIDO REALIZADO! (Simulación)');
+            localStorage.removeItem('vourne_cart'); // Vaciar carrito
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
