@@ -1,9 +1,9 @@
-// STR4WRLD / VOURNE ENGINE v2.0
+// STR4WRLD / VOURNE ENGINE v2.1
 // Logic: Catalog, Cart, Animations & Persistence
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. CONFIGURACIÓN Y DATOS (Simulando Base de Datos) ---
+    // --- 1. DATOS ---
     const products = [
         { id: 1, name: "PARKA TÉCNICA V1", price: 129.00, image: "assets/images/products/parka-tecnica.jpg", category: "jackets", section: "men" },
         { id: 2, name: "JERSEY OVERSIZE DISTRESSED", price: 59.90, image: "assets/images/products/jersey-oversize.jpg", category: "sweaters", section: "women" },
@@ -13,60 +13,61 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 6, name: "VESTIDO MIDI NIGHT", price: 65.00, image: "assets/images/products/vestido-midi.jpg", category: "dresses", section: "women" }
     ];
 
-    // Estado del Carrito
     let cart = JSON.parse(localStorage.getItem('vourne_cart')) || [];
 
-    // Elementos del DOM
+    // Elementos DOM
     const catalogGrid = document.getElementById('catalogGrid');
     const featuredGrid = document.getElementById('featuredGrid');
     const cartSidebar = document.querySelector('.cart-sidebar');
     const cartOverlay = document.querySelector('.cart-overlay');
     const cartItemsContainer = document.querySelector('.cart-items');
     const cartTotalEl = document.querySelector('.cart-subtotal');
-    const cartCountEl = document.querySelectorAll('.cart-count'); // Selecciona todos los contadores
-    const cartToggleBtns = document.querySelectorAll('.cart-toggle');
-    const closeCartBtn = document.querySelector('.close-cart');
+    const cartCountEls = document.querySelectorAll('.cart-count');
 
-    // --- 2. FUNCIONES DEL CARRITO ---
+    // --- 2. SMOOTH SCROLL (JS Fallback) ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 
-    // Guardar y Actualizar UI
+    // --- 3. FUNCIONES CARRITO ---
     function updateCartUI() {
         localStorage.setItem('vourne_cart', JSON.stringify(cart));
-        
-        // Calcular totales
         const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
         const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-        // Actualizar contadores (Header)
-        cartCountEl.forEach(el => el.innerText = totalQty);
+        cartCountEls.forEach(el => el.innerText = totalQty);
 
-        // Renderizar Items en el Sidebar
         if (cartItemsContainer) {
             if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<div class="empty-msg">TU CARRITO ESTÁ VACÍO.<br>EXPLORA EL CATÁLOGO.</div>';
-                if (cartTotalEl) cartTotalEl.innerText = '0.00 €';
+                cartItemsContainer.innerHTML = '<div class="empty-msg">CARRITO VACÍO</div>';
+                if(cartTotalEl) cartTotalEl.innerText = '0.00 €';
             } else {
                 cartItemsContainer.innerHTML = cart.map(item => `
                     <div class="cart-item animate-fade-in">
-                        <div class="cart-item-img">
-                            <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80/111/555'">
-                        </div>
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/80/111/555'">
                         <div class="cart-item-details">
                             <h4>${item.name}</h4>
-                            <div class="cart-qty-row">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
                                 <span>${item.qty} x ${item.price.toFixed(2)} €</span>
+                                <button class="cart-item-remove" data-id="${item.id}">X</button>
                             </div>
-                            <button class="cart-item-remove" data-id="${item.id}">ELIMINAR</button>
                         </div>
                     </div>
                 `).join('');
-                
-                if (cartTotalEl) cartTotalEl.innerText = totalPrice.toFixed(2) + ' €';
+                if(cartTotalEl) cartTotalEl.innerText = totalPrice.toFixed(2) + ' €';
             }
         }
     }
 
-    // Abrir/Cerrar Sidebar
     function toggleCart(show) {
         if (show) {
             cartSidebar.classList.add('open');
@@ -77,73 +78,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Añadir al Carrito (Lógica)
     function addToCart(id) {
         const product = products.find(p => p.id === id);
         if (!product) return;
-
         const existing = cart.find(item => item.id === id);
-        if (existing) {
-            existing.qty++;
-        } else {
-            cart.push({ ...product, qty: 1 });
-        }
+        if (existing) existing.qty++;
+        else cart.push({ ...product, qty: 1 });
         updateCartUI();
     }
 
-    // Eliminar del Carrito
     function removeFromCart(id) {
         cart = cart.filter(item => item.id !== id);
         updateCartUI();
     }
 
-    // --- 3. ANIMACIÓN DE VUELO (EFECTO WOW) ---
+    // --- 4. ANIMACIÓN DE VUELO ---
     function animateFlyToCart(btn) {
-        // 1. Clonar la imagen del producto
         const card = btn.closest('.product-card');
         const img = card.querySelector('img');
-        const cartIcon = document.querySelector('.nav__right .cart-toggle'); // Destino
-
+        const cartIcon = document.querySelector('.nav__right .cart-toggle');
+        
         if (!img || !cartIcon) return;
 
         const flyImg = img.cloneNode();
         flyImg.classList.add('flying-img');
+        
+        const start = img.getBoundingClientRect();
+        const end = cartIcon.getBoundingClientRect();
 
-        // 2. Posición inicial
-        const startRect = img.getBoundingClientRect();
-        flyImg.style.left = startRect.left + 'px';
-        flyImg.style.top = startRect.top + 'px';
-        flyImg.style.width = startRect.width + 'px';
-        flyImg.style.height = startRect.height + 'px';
+        flyImg.style.left = start.left + 'px';
+        flyImg.style.top = start.top + 'px';
+        flyImg.style.width = start.width + 'px';
+        flyImg.style.height = start.height + 'px';
 
         document.body.appendChild(flyImg);
 
-        // 3. Posición final (Carrito)
-        const endRect = cartIcon.getBoundingClientRect();
-        
-        // Forzar reflow para que la animación funcione
+        // Forzar reflow
         void flyImg.offsetWidth;
 
-        // 4. Animar
-        flyImg.style.left = (endRect.left + 10) + 'px';
-        flyImg.style.top = (endRect.top + 10) + 'px';
-        flyImg.style.width = '30px';
-        flyImg.style.height = '30px';
-        flyImg.style.opacity = '0.5';
+        flyImg.style.left = (end.left + 5) + 'px';
+        flyImg.style.top = (end.top + 5) + 'px';
+        flyImg.style.width = '20px';
+        flyImg.style.height = '20px';
+        flyImg.style.opacity = '0';
 
-        // 5. Limpiar al terminar
         setTimeout(() => {
             flyImg.remove();
-            // Efecto de "rebote" en el icono del carrito
             cartIcon.classList.add('bump');
             setTimeout(() => cartIcon.classList.remove('bump'), 300);
-            
-            // Abrir el carrito automáticamente tras la animación
-            toggleCart(true);
-        }, 800); // Coincide con la duración de CSS transition
+            toggleCart(true); // Abrir carrito al terminar
+        }, 800);
     }
 
-    // --- 4. RENDERIZADO DE PRODUCTOS ---
+    // --- 5. RENDER ---
     const renderCard = (product) => `
         <div class="product-card animate-fade-in">
             <div class="product-badges"><span class="badge">${product.section}</span></div>
@@ -161,48 +148,32 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Cargar en Home (Featured)
-    if (featuredGrid) {
-        featuredGrid.innerHTML = products.slice(0, 4).map(renderCard).join('');
-    }
-
-    // Cargar en Catálogo (All)
+    if (featuredGrid) featuredGrid.innerHTML = products.slice(0, 4).map(renderCard).join('');
+    
     if (catalogGrid) {
         const renderCatalog = (filter = 'all') => {
-            catalogGrid.innerHTML = '';
             const filtered = filter === 'all' ? products : products.filter(p => p.section === filter || p.category === filter);
             catalogGrid.innerHTML = filtered.length ? filtered.map(renderCard).join('') : '<p>NO HAY STOCK.</p>';
         };
         renderCatalog();
-        
-        // Filtros
         document.getElementById('category-filter')?.addEventListener('change', (e) => renderCatalog(e.target.value));
     }
 
-    // --- 5. EVENT LISTENERS GLOBALES ---
-    
-    // Delegación de eventos para botones "Añadir" (funciona con elementos dinámicos)
+    // --- 6. EVENTOS GLOBALES ---
     document.body.addEventListener('click', (e) => {
         if (e.target.classList.contains('add-to-cart-btn')) {
-            const btn = e.target;
-            const id = parseInt(btn.dataset.id);
-            
-            // 1. Logic
+            const id = parseInt(e.target.dataset.id);
             addToCart(id);
-            // 2. Animation
-            animateFlyToCart(btn);
+            animateFlyToCart(e.target);
         }
-        
         if (e.target.classList.contains('cart-item-remove')) {
             removeFromCart(parseInt(e.target.dataset.id));
         }
     });
 
-    // Toggle Cart Events
-    cartToggleBtns.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); toggleCart(true); }));
-    closeCartBtn?.addEventListener('click', () => toggleCart(false));
+    document.querySelectorAll('.cart-toggle').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); toggleCart(true); }));
+    document.querySelector('.close-cart')?.addEventListener('click', () => toggleCart(false));
     cartOverlay?.addEventListener('click', () => toggleCart(false));
 
-    // Init
     updateCartUI();
 });
