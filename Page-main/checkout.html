@@ -17,107 +17,170 @@
 
     <main class="checkout-page">
         <div class="container form-section">
-            <div class="catalog-header">
-                <h1>SECURE CHECKOUT</h1>
-            </div>
+            
+            <div id="step-auth" class="animate-fade-in">
+                <div class="catalog-header">
+                    <h1>IDENTIFICACIÓN</h1>
+                    <p>CÓMO QUIERES CONTINUAR</p>
+                </div>
+                
+                <div class="auth-options">
+                    <div class="auth-card">
+                        <h3>INVITADO</h3>
+                        <p>Compra rápida sin necesidad de registrarse. Solo pediremos los datos necesarios para el envío.</p>
+                        <button class="btn btn--secondary btn--full" onclick="startGuestCheckout()">CONTINUAR COMO INVITADO</button>
+                    </div>
 
-            <div class="checkout-steps">
-                <div class="step active" id="step-indicator-1">01 INFO</div>
-                <div class="step" id="step-indicator-2">02 PAGO</div>
-                <div class="step" id="step-indicator-3">03 CONFIRMACIÓN</div>
-            </div>
-
-            <form id="checkoutForm">
-                <div class="checkout-step-content" id="step-1">
-                    <h3 class="mb-2">DATOS DE ENVÍO</h3>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="TU EMAIL" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nombre Completo</label>
-                        <input type="text" placeholder="NOMBRE Y APELLIDOS" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Dirección</label>
-                        <input type="text" placeholder="CALLE Y NÚMERO" required>
-                    </div>
-                    <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
-                        <input type="text" placeholder="CIUDAD" required>
-                        <input type="text" placeholder="CÓDIGO POSTAL" required>
-                    </div>
-                    <div class="mt-2">
-                        <button type="button" class="btn btn--primary btn--full" onclick="goToStep(2)">CONTINUAR AL PAGO</button>
+                    <div class="auth-card">
+                        <h3>MIEMBRO</h3>
+                        <p>Inicia sesión o crea una cuenta para guardar tus datos, acceder a drops exclusivos y ver historial.</p>
+                        <button class="btn btn--primary btn--full" onclick="alert('Funcionalidad de registro próximamente')">INICIAR SESIÓN / CREAR</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="checkout-step-content hidden" id="step-2">
-                    <h3 class="mb-2">MÉTODO DE PAGO</h3>
-                    
-                    <div class="payment-options">
-                        <div class="payment-option selected" onclick="selectPayment(this, 'card')">
-                            <i class="fas fa-credit-card payment-icon"></i>
-                            <span>TARJETA DE CRÉDITO / DÉBITO</span>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment(this, 'paypal')">
-                            <i class="fab fa-paypal payment-icon"></i>
-                            <span>PAYPAL</span>
-                        </div>
-                        <div class="payment-option" onclick="selectPayment(this, 'crypto')">
-                            <i class="fab fa-bitcoin payment-icon"></i>
-                            <span>CRYPTO (BTC/ETH)</span>
-                        </div>
-                    </div>
+            <div id="checkout-process" class="hidden">
+                <div class="catalog-header">
+                    <h1>SECURE CHECKOUT</h1>
+                </div>
 
-                    <div id="card-details" class="mt-2">
+                <div class="checkout-steps">
+                    <div class="step active" id="step-indicator-1">01 INFO</div>
+                    <div class="step" id="step-indicator-2">02 PAGO</div>
+                    <div class="step" id="step-indicator-3">03 FIN</div>
+                </div>
+
+                <form id="checkoutForm">
+                    <div class="checkout-step-content" id="step-1">
+                        <h3 class="mb-2">DATOS DE ENVÍO</h3>
+                        
                         <div class="form-group">
-                            <label>Número de Tarjeta</label>
-                            <input type="text" placeholder="0000 0000 0000 0000">
+                            <label>Email *</label>
+                            <input type="email" id="email" placeholder="TU EMAIL" required>
                         </div>
+                        
+                        <div class="form-group">
+                            <label>Nombre Completo *</label>
+                            <input type="text" id="name" placeholder="NOMBRE Y APELLIDOS" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Dirección *</label>
+                            <input type="text" id="address" placeholder="CALLE Y NÚMERO" required>
+                        </div>
+                        
                         <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
-                            <input type="text" placeholder="MM/YY">
-                            <input type="text" placeholder="CVC">
+                            <div>
+                                <label>Ciudad *</label>
+                                <input type="text" id="city" placeholder="CIUDAD" required>
+                            </div>
+                            <div>
+                                <label>Código Postal *</label>
+                                <input type="text" id="zip" placeholder="CÓDIGO POSTAL" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <button type="button" class="btn btn--primary btn--full" onclick="validateAndNextStep()">IR AL PAGO</button>
                         </div>
                     </div>
 
-                    <div class="mt-2" style="display:flex; gap:1rem;">
-                        <button type="button" class="btn btn--secondary" style="flex:1;" onclick="goToStep(1)">ATRÁS</button>
-                        <button type="submit" class="btn btn--primary" style="flex:2;">FINALIZAR PEDIDO</button>
+                    <div class="checkout-step-content hidden" id="step-2">
+                        <h3 class="mb-2">MÉTODO DE PAGO</h3>
+                        
+                        <div class="payment-options">
+                            <div class="payment-option selected" onclick="selectPayment(this, 'card')">
+                                <i class="fas fa-credit-card"></i> <span>TARJETA</span>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment(this, 'paypal')">
+                                <i class="fab fa-paypal"></i> <span>PAYPAL</span>
+                            </div>
+                        </div>
+
+                        <div id="card-details" class="mt-2">
+                            <div class="form-group">
+                                <label>Número de Tarjeta</label>
+                                <input type="text" placeholder="0000 0000 0000 0000">
+                            </div>
+                            <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                                <input type="text" placeholder="MM/YY">
+                                <input type="text" placeholder="CVC">
+                            </div>
+                        </div>
+
+                        <div class="mt-2" style="display:flex; gap:1rem;">
+                            <button type="button" class="btn btn--secondary" style="flex:1;" onclick="goToStep(1)">ATRÁS</button>
+                            <button type="submit" class="btn btn--primary" style="flex:2;">PAGAR Y FINALIZAR</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+
         </div>
     </main>
 
     <script>
-        function goToStep(step) {
+        // 1. Iniciar Checkout como Invitado
+        function startGuestCheckout() {
+            document.getElementById('step-auth').classList.add('hidden');
+            document.getElementById('checkout-process').classList.remove('hidden');
+            document.getElementById('checkout-process').classList.add('animate-fade-in');
+        }
+
+        // 2. Navegación entre pasos
+        function goToStep(stepNumber) {
             // Ocultar todos
             document.querySelectorAll('.checkout-step-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
             
-            // Mostrar actual
-            document.getElementById(`step-${step}`).classList.remove('hidden');
+            // Mostrar destino
+            document.getElementById(`step-${stepNumber}`).classList.remove('hidden');
             
-            // Actualizar indicadores (y anteriores)
-            for(let i=1; i<=step; i++) {
+            // Actualizar indicadores
+            for(let i=1; i<=stepNumber; i++) {
                 document.getElementById(`step-indicator-${i}`).classList.add('active');
             }
         }
 
+        // 3. Validación del Paso 1
+        function validateAndNextStep() {
+            // Obtener campos requeridos del paso 1
+            const requiredIds = ['email', 'name', 'address', 'city', 'zip'];
+            let isValid = true;
+
+            requiredIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el.value.trim()) {
+                    el.classList.add('error'); // Añadir borde rojo
+                    isValid = false;
+                } else {
+                    el.classList.remove('error');
+                }
+            });
+
+            if (isValid) {
+                goToStep(2); // Avanzar solo si todo está relleno
+            } else {
+                alert('Por favor, rellena todos los campos obligatorios.');
+            }
+        }
+
+        // 4. Selección de Pago
         function selectPayment(element, method) {
             document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             
-            // Mostrar/Ocultar detalles de tarjeta
             const cardDetails = document.getElementById('card-details');
             if(method === 'card') cardDetails.classList.remove('hidden');
             else cardDetails.classList.add('hidden');
         }
 
+        // 5. Submit Final
         document.getElementById('checkoutForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('¡PEDIDO REALIZADO! (Simulación)');
-            localStorage.removeItem('vourne_cart'); // Vaciar carrito
+            // Aquí iría la integración real (Stripe/PayPal)
+            alert('Procesando pedido... (Simulación)');
+            localStorage.removeItem('vourne_cart');
             window.location.href = 'index.html';
         });
     </script>
