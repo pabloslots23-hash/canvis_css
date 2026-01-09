@@ -84,49 +84,104 @@ p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 0.5px; }
     vertical-align: top; font-weight: bold;
 }
 
-/* 1. Aseguramos que el contenedor HERO ocupe lo necesario */
-.hero { 
+/* --- ESTILOS HERO CORREGIDOS --- */
+
+/* 1. El contenedor principal: Ocupa toda la pantalla */
+.hero {
     position: relative;
     width: 100%;
-    /* En móvil usamos dvh para evitar saltos con la barra de navegación del navegador */
-    height: 100vh; 
-    min-height: 600px; /* Esto evita que se vea pequeño si hay poco contenido */
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    overflow: hidden; 
+    height: 100vh; /* Altura completa de la ventana */
+    display: flex;
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    overflow: hidden;
+    margin-bottom: 0;
 }
 
-/* 2. El video debe estirarse y recortarse para llenar el hueco sin deformarse */
-.hero__background { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; /* CLAVE: Recorta el video para que cubra todo el fondo */
-    object-position: center; /* Centra el video */
-    z-index: -1; /* Se queda detrás */
-    filter: brightness(0.5); /* Oscurece el video para que se lean las letras blancas */
+/* 2. El video de fondo */
+.hero__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Rellena todo el fondo */
+    
+    /* TRUCO PARA PC: */
+    /* Como el video es vertical, le decimos que se centre en el 20% superior */
+    /* Así se verán los bolsillos/trasero en lugar de solo las piernas */
+    object-position: center 30%; 
+    
+    z-index: -1;
+    filter: brightness(0.7); /* Un poco oscuro para que resalte el texto */
 }
 
-/* 3. Aseguramos que el contenido (texto y botón) esté encima */
+/* 3. El contenedor general del contenido */
 .hero__content {
     position: relative;
-    z-index: 2; /* Capa superior */
+    z-index: 2;
     width: 100%;
     padding: 0 20px;
+    display: flex;
+    justify-content: center;
 }
 
-/* 4. AJUSTE ESPECÍFICO PARA MÓVILES */
+/* 4. LA CAJA NEGRA (Estilo de tu foto 3) */
+.hero__box {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 3rem 4rem; /* Espacio interior */
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    backdrop-filter: blur(5px); /* Efecto borroso detrás de la caja */
+    max-width: 600px; /* Que no sea gigante */
+}
+
+/* Ajustes de texto para que sea idéntico a tu foto */
+.hero__title {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 5px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.hero__subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: #ccc;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+/* Botón blanco sólido como en la foto 3 */
+.hero__box .btn {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero__box .btn:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+/* --- VERSIÓN MÓVIL (Para arreglar la foto 2) --- */
 @media (max-width: 768px) {
-    .hero__title {
-        font-size: 3rem; /* Texto un poco más pequeño para que quepa */
-    }
-    
     .hero__background {
-        /* En móviles, centramos el video un poco diferente si es necesario */
-        object-position: center top; 
+        /* En móvil el video sí cabe bien, así que lo centramos normal */
+        object-position: center center;
+    }
+
+    .hero__box {
+        padding: 2rem; /* Caja un poco más pequeña en móvil */
+        width: 90%; /* Que no toque los bordes */
+    }
+
+    .hero__title {
+        font-size: 2.5rem; /* Título más pequeño */
     }
 }
 
