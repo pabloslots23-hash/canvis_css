@@ -1,81 +1,101 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <link rel="stylesheet" href="assets/css/animations.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <style>
+<style>
+        /* 1. CONFIGURACIÓN BÁSICA DE LA PÁGINA (SPLASH PAGE) */
         html, body {
             height: 100%;
-            overflow: hidden;
+            width: 100%;
+            overflow: hidden; /* Bloqueamos scroll */
             margin: 0;
+            background-color: #000; /* Fondo negro para los bordes del PC */
         }
+
+        /* 2. EL CONTENEDOR PRINCIPAL */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* 3. EL VIDEO DE FONDO (LA CLAVE DEL ARREGLO) */
+        .hero__background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centrado perfecto matemático */
+            z-index: 1;
+            
+            /* EN PC: */
+            width: auto;      /* No forzamos el ancho */
+            height: 100%;     /* Forzamos la altura completa */
+            max-width: 100%;  
+            object-fit: contain; /* IMPORTANTE: Muestra el video entero sin cortar nada */
+        }
+
+        /* 4. EL CONTENIDO (TEXTO Y BOTÓN) */
+        .hero__content {
+            position: relative;
+            z-index: 10; /* Encima del video */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 5. LA CAJA DEL TEXTO */
+        .hero__box {
+            /* Fondo semitransparente para leer bien */
+            background: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(10px);
+            padding: 2rem 3rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Animación suave de entrada */
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero__title {
+            font-size: 4rem;
+            color: white;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: 4px;
+        }
+
+        .hero__subtitle {
+            color: #ccc;
+            margin: 1rem 0 2rem 0;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* 6. CORRECCIONES PARA MÓVIL */
+        @media (max-width: 768px) {
+            .hero__background {
+                /* EN MÓVIL: */
+                width: 100%;      /* Ancho completo */
+                height: 100%;     /* Alto completo */
+                object-fit: cover; /* Aquí sí interesa rellenar todo porque la pantalla es vertical */
+            }
+
+            .hero__title {
+                font-size: 2.5rem;
+            }
+            
+            .hero__box {
+                width: 85%;
+                padding: 1.5rem;
+            }
+        }
+
+        /* Ajustes header transparente */
         .site-header {
-            border-bottom: none;
-            background: transparent; 
+            background: transparent !important;
+            border-bottom: none !important;
+            z-index: 20;
         }
     </style>
-
-</head> <body>
-    ```
-
-**Resumen:**
-Busca la línea que dice `</head>` y haz un par de "Enters" (saltos de línea) **encima** de ella para hacer hueco. Ahí es donde pegas el código.
-<body>
-    
-    <header class="site-header">
-        <div class="container">
-            <nav class="nav">
-                <div class="nav__left">
-                    <a href="index.html" class="nav__brand">VOURNE</a>
-                </div>
-
-                <div class="nav__center">
-                    <a href="catalog/all.html" class="nav__link">CATÁLOGO</a>
-                    <a href="catalog/all.html" class="nav__link">DROPS</a>
-                </div>
-
-                <div class="nav__right">
-                    <a href="#" class="nav__link cart-toggle">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-count">0</span>
-                    </a>
-                    <a href="#" class="nav__link"><i class="fas fa-user"></i></a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <div class="cart-overlay"></div>
-    <div class="cart-sidebar">
-        <div class="cart-header-row">
-            <h3>TU CARRITO</h3>
-            <button class="close-cart">&times;</button>
-        </div>
-        <div class="cart-items"></div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>TOTAL:</span>
-                <span class="cart-subtotal">0.00 €</span>
-            </div>
-            <a href="checkout.html" class="btn btn--primary btn--full">PAGAR AHORA</a>
-        </div>
-    </div>
-
-    <section class="hero" id="home">
-        <video autoplay muted loop playsinline class="hero__background">
-            <source src="assets/video/fondo.mp4" type="video/mp4">
-        </video>
-
-        <div class="hero__content">
-            <div class="hero__box">
-                <h1 class="hero__title">VOURNE</h1>
-                <p class="hero__subtitle">NO RULES. JUST AESTHETICS.</p>
-                <a href="catalog/all.html" class="btn btn--primary">VER DROPS</a>
-            </div>
-        </div>
-    </section>
-    
-    <script src="assets/js/main.js"></script>
-</body>
-</html>
