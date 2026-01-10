@@ -1,101 +1,205 @@
-<style>
-        /* 1. CONFIGURACIÓN BÁSICA DE LA PÁGINA (SPLASH PAGE) */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STR4WRLD - VOURNE EDITION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* 1. ESTRUCTURA BÁSICA SIN SCROLL */
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Bloqueamos scroll */
+            overflow: hidden; /* Bloqueamos el scroll */
             margin: 0;
-            background-color: #000; /* Fondo negro para los bordes del PC */
+            background-color: #000;
         }
 
-        /* 2. EL CONTENEDOR PRINCIPAL */
+        .site-header {
+            background: transparent !important;
+            border-bottom: none !important;
+            z-index: 50; /* Por encima de todo */
+        }
+
+        /* 2. CONTENEDOR MAESTRO */
         .hero {
             position: relative;
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* 3. EL VIDEO DE FONDO (LA CLAVE DEL ARREGLO) */
-        .hero__background {
+        /* 3. CAPA 1: FONDO AMBIENTAL (SOLO PC) */
+        /* Este es el video borroso que rellena los huecos negros */
+        .video-layer-blur {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centrado perfecto matemático */
-            z-index: 1;
-            
-            /* EN PC: */
-            width: auto;      /* No forzamos el ancho */
-            height: 100%;     /* Forzamos la altura completa */
-            max-width: 100%;  
-            object-fit: contain; /* IMPORTANTE: Muestra el video entero sin cortar nada */
-        }
-
-        /* 4. EL CONTENIDO (TEXTO Y BOTÓN) */
-        .hero__content {
-            position: relative;
-            z-index: 10; /* Encima del video */
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .video-layer-blur video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Rellena todo */
+            filter: blur(20px) brightness(0.4); /* Borroso y oscuro */
+            transform: scale(1.1); /* Un poco de zoom para evitar bordes blancos por el blur */
         }
 
-        /* 5. LA CAJA DEL TEXTO */
+        /* 4. CAPA 2: VIDEO PRINCIPAL (VERTICAL) */
+        .video-layer-main {
+            position: absolute;
+            z-index: 2;
+            /* En PC, limitamos la altura para que se vea el video entero */
+            height: 85%; 
+            /* Esta propiedad mágica mantiene la forma de móvil (9:16) */
+            aspect-ratio: 9/16; 
+            
+            /* Sombra elegante para separarlo del fondo */
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            border-radius: 12px; /* Bordes redondeados suaves */
+            overflow: hidden;
+        }
+        .video-layer-main video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 5. CAPA 3: TEXTO Y BOTÓN */
+        .hero__content {
+            position: absolute;
+            z-index: 10; /* Encima de todo */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .hero__box {
-            /* Fondo semitransparente para leer bien */
-            background: rgba(0, 0, 0, 0.4); 
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3); /* Fondo sutil */
+            backdrop-filter: blur(8px);
             padding: 2rem 3rem;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            /* Animación suave de entrada */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
             animation: fadeIn 1s ease-out;
         }
 
         .hero__title {
-            font-size: 4rem;
-            color: white;
+            font-size: 3.5rem;
+            color: #fff;
             margin: 0;
-            line-height: 1;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .hero__subtitle {
-            color: #ccc;
-            margin: 1rem 0 2rem 0;
+            color: #ddd;
+            margin: 0.5rem 0 2rem 0;
             font-size: 0.9rem;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
-        /* 6. CORRECCIONES PARA MÓVIL */
+        /* 6. ADAPTACIÓN A MÓVIL */
         @media (max-width: 768px) {
-            .hero__background {
-                /* EN MÓVIL: */
-                width: 100%;      /* Ancho completo */
-                height: 100%;     /* Alto completo */
-                object-fit: cover; /* Aquí sí interesa rellenar todo porque la pantalla es vertical */
+            /* En móvil ocultamos el fondo borroso (ahorra batería y no hace falta) */
+            .video-layer-blur {
+                display: none;
             }
 
-            .hero__title {
-                font-size: 2.5rem;
+            /* El video principal pasa a ocupar TODA la pantalla */
+            .video-layer-main {
+                width: 100%;
+                height: 100%;
+                aspect-ratio: auto; /* Quitamos la proporción fija */
+                border-radius: 0;
+                box-shadow: none;
             }
             
-            .hero__box {
-                width: 85%;
-                padding: 1.5rem;
-            }
-        }
-
-        /* Ajustes header transparente */
-        .site-header {
-            background: transparent !important;
-            border-bottom: none !important;
-            z-index: 20;
+            .hero__title { font-size: 2.8rem; }
+            .hero__box { width: 90%; padding: 1.5rem; }
         }
     </style>
+</head>
+<body>
+    
+    <header class="site-header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav__left">
+                    <a href="index.html" class="nav__brand" style="color: white;">VOURNE</a>
+                </div>
+
+                <div class="nav__center">
+                    <a href="catalog/all.html" class="nav__link" style="color: white;">CATÁLOGO</a>
+                    <a href="catalog/all.html" class="nav__link" style="color: white;">DROPS</a>
+                </div>
+
+                <div class="nav__right">
+                    <a href="#" class="nav__link cart-toggle" style="color: white;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <a href="#" class="nav__link" style="color: white;"><i class="fas fa-user"></i></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header-row">
+            <h3>TU CARRITO</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span class="cart-subtotal">0.00 €</span>
+            </div>
+            <a href="checkout.html" class="btn btn--primary btn--full">PAGAR AHORA</a>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        
+        <div class="video-layer-blur">
+            <video autoplay muted loop playsinline>
+                <source src="assets/video/fondo.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="video-layer-main">
+            <video autoplay muted loop playsinline>
+                <source src="assets/video/fondo.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="hero__content">
+            <div class="hero__box">
+                <h1 class="hero__title">VOURNE</h1>
+                <p class="hero__subtitle">NO RULES. JUST AESTHETICS.</p>
+                <a href="catalog/all.html" class="btn btn--primary">VER DROPS</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
